@@ -58,7 +58,7 @@ contract('ProfitSharingMock', function (accounts) {
     await miniMeToken.generateTokens(accounts[3], 800);
 
     //Recycle remainder of dividend 0
-    profitSharing.setMockedNow(YEAR);
+    await profitSharing.setMockedNow(YEAR);
     await profitSharing.recycleDividend(0, {from: accounts[0]});
 
     //Check everyone can clain recycled dividend

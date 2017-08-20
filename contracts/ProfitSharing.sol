@@ -43,9 +43,10 @@ contract ProfitSharing is Ownable {
   {
     uint256 currentSupply = miniMeToken.totalSupplyAt(block.number);
     uint256 dividendIndex = dividends.length;
+    uint256 blockNumber = SafeMath.sub(block.number, 1);
     dividends.push(
       Dividend(
-        block.number,
+        blockNumber,
         getNow(),
         msg.value,
         0,
@@ -53,7 +54,7 @@ contract ProfitSharing is Ownable {
         false
       )
     );
-    DividendDeposited(msg.sender, block.number, msg.value, currentSupply, dividendIndex);
+    DividendDeposited(msg.sender, blockNumber, msg.value, currentSupply, dividendIndex);
   }
 
   function claimDividend(uint256 _dividendIndex) public
@@ -93,9 +94,10 @@ contract ProfitSharing is Ownable {
     uint256 currentSupply = miniMeToken.totalSupplyAt(block.number);
     uint256 remainingAmount = SafeMath.sub(dividend.amount, dividend.claimedAmount);
     uint256 dividendIndex = dividends.length;
+    uint256 blockNumber = SafeMath.sub(block.number, 1);
     dividends.push(
       Dividend(
-        block.number,
+        blockNumber,
         getNow(),
         remainingAmount,
         0,
@@ -103,7 +105,7 @@ contract ProfitSharing is Ownable {
         false
       )
     );
-    DividendRecycled(msg.sender, block.number, remainingAmount, currentSupply, dividendIndex);
+    DividendRecycled(msg.sender, blockNumber, remainingAmount, currentSupply, dividendIndex);
   }
 
   //Function is mocked for tests

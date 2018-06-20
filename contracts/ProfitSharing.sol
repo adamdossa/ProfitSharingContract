@@ -13,7 +13,7 @@ contract ProfitSharing is Ownable {
 
   MiniMeToken public miniMeToken;
 
-  uint256 public RECYCLE_TIME = 1 years;
+  uint256 public RECYCLE_TIME = now + 365 days;
 
   struct Dividend {
     uint256 blockNumber;
